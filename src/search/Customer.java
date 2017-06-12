@@ -55,14 +55,27 @@ public class Customer {
             
             if (repInput.equals("2")){
                 /*   update statement     */
-                preparedStatement=connect.prepareStatement("update Clients.customers SET StreetAddress=? WHERE FullName=?");
+                preparedStatement=connect.prepareStatement("update Clients.customers SET StreetAddress=?, City=?, State=?, ZipCode=?  WHERE LastName=?");
                 System.out.println("Enter the new street Address:");
                 String streetAddress = sc.nextLine();
+                System.out.println("Enter the new City:");
+                String city = sc.nextLine();
+                System.out.println("Enter the new State:");
+                String state = sc.nextLine();
+                System.out.println("Enter the new ZipCode:");
+                String zipCode = sc.nextLine();
+                
                 preparedStatement.setString(1, streetAddress);
-                preparedStatement.setString(2, last);
-                preparedStatement.executeUpdate();}
+                preparedStatement.setString(2, city);
+                preparedStatement.setString(3, state);
+                preparedStatement.setString(4, zipCode);
+                preparedStatement.setString(5, last);
+                preparedStatement.executeUpdate();
+                preparedStatement=connect.prepareStatement("select * from Clients.customers where LastName=?");
+                preparedStatement.setString(1, last);
+                preparedStatement.executeQuery();}
             else{preparedStatement=connect.prepareStatement("select * from Clients.customers");
-            		preparedStatement.executeUpdate();}
+            		preparedStatement.executeQuery();}
             
             
             /*   update statement      */
